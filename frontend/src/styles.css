@@ -240,6 +240,10 @@ button {
   gap: 18px;
 }
 
+.dashboard-grid.two-column {
+  grid-template-columns: minmax(300px, 0.8fr) minmax(0, 1.6fr);
+}
+
 .workbench {
   display: grid;
   grid-template-columns: minmax(0, 1.6fr) minmax(300px, 0.8fr);
@@ -461,6 +465,70 @@ button {
   margin-top: 16px;
 }
 
+.security-score {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  border: 1px solid #d9e7e2;
+  border-radius: 8px;
+  background: #f7fbf9;
+  padding: 18px;
+}
+
+.security-score span,
+.control-card span,
+.alert-row span {
+  color: #6a7773;
+  font-size: 0.88rem;
+}
+
+.security-score strong {
+  display: block;
+  margin-top: 4px;
+  color: #157f72;
+  font-size: 2rem;
+}
+
+.security-score p {
+  margin: 0;
+  font-weight: 800;
+}
+
+.control-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.control-card,
+.alert-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid #edf2ef;
+  border-radius: 8px;
+  padding: 12px;
+}
+
+.control-card svg,
+.alert-row svg {
+  color: #157f72;
+  flex: 0 0 auto;
+}
+
+.control-card strong,
+.control-card span {
+  display: block;
+}
+
+.alert-list {
+  display: grid;
+  gap: 10px;
+  margin-top: 14px;
+}
+
 @media (max-width: 1180px) {
   .app-shell {
     grid-template-columns: 92px minmax(0, 1fr);
@@ -488,6 +556,10 @@ button {
 
   .dashboard-grid,
   .workbench {
+    grid-template-columns: 1fr;
+  }
+
+  .dashboard-grid.two-column {
     grid-template-columns: 1fr;
   }
 }
@@ -565,6 +637,11 @@ button {
   }
 
   .goal div:first-child {
+    display: grid;
+  }
+
+  .control-grid,
+  .security-score {
     display: grid;
   }
 }
