@@ -1,11 +1,21 @@
-import { Bell, RefreshCcw, Search } from "lucide-react";
+import { Bell, CalendarDays, LogOut, RefreshCcw, Search, ShieldCheck } from "lucide-react";
 
-function Topbar({ plan, company, query, onQueryChange }) {
+function Topbar({ plan, company, query, user, onLogout, onQueryChange }) {
   return (
     <header className="topbar">
-      <div>
+      <div className="topbar-copy">
         <p>{plan}</p>
         <h1>{company}</h1>
+        <div className="hero-badges">
+          <span>
+            <ShieldCheck size={15} />
+            Bank-grade controls
+          </span>
+          <span>
+            <CalendarDays size={15} />
+            Today, July 8
+          </span>
+        </div>
       </div>
       <div className="topbar-actions">
         <label className="search">
@@ -17,6 +27,10 @@ function Topbar({ plan, company, query, onQueryChange }) {
         </button>
         <button className="icon-button" title="Notifications">
           <Bell size={18} />
+        </button>
+        <button className="profile-button" onClick={onLogout} title="Sign out">
+          <span>{user?.name?.slice(0, 1) ?? "A"}</span>
+          <LogOut size={17} />
         </button>
       </div>
     </header>

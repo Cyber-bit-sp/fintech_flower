@@ -2,9 +2,11 @@ import cors from "cors";
 import express from "express";
 import helmet from "helmet";
 import morgan from "morgan";
+import { authRouter } from "./routes/auth.js";
 import { dashboardRouter } from "./routes/dashboard.js";
 import { transferRouter } from "./routes/transfers.js";
 import { errorHandler } from "./middleware/errorHandler.js";
+import { requireAuth } from "./middleware/requireAuth.js";
 
 export function createApp() {
   const app = express();
@@ -22,8 +24,9 @@ export function createApp() {
     res.json({ status: "ok", service: "aurora-api" });
   });
 
-  app.use("/api/dashboard", dashboardRouter);
-  app.use("/api/transfers", transferRouter);
+  app.use("/api/auth", authRouter);
+  app.use("/api/dashboard", requireAuth, dashboardRouter);
+  app.use("/api/transfers", requireAuth, transferRouter);
   app.use(errorHandler);
 
   return app;

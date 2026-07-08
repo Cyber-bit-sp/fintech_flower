@@ -1,4 +1,18 @@
-import { accounts, cards, cashflow, goals, portfolio, transactions } from "../data/financeData.js";
+import {
+  accounts,
+  auditLog,
+  beneficiaries,
+  budgets,
+  cards,
+  cashflow,
+  goals,
+  insights,
+  paymentQueue,
+  portfolio,
+  productionReadiness,
+  transactions,
+  watchlist
+} from "../data/financeData.js";
 
 const currency = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" });
 
@@ -37,6 +51,13 @@ export function getDashboard() {
     cards,
     portfolio,
     cashflow,
-    goals
+    goals,
+    paymentQueue,
+    beneficiaries,
+    budgets,
+    insights,
+    watchlist,
+    auditLog,
+    productionReadiness
   };
 }

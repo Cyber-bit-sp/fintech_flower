@@ -1,8 +1,14 @@
 import AccountsPanel from "./AccountsPanel.jsx";
+import AuditTrailPanel from "./AuditTrailPanel.jsx";
+import BudgetsPanel from "./BudgetsPanel.jsx";
 import CardsPanel from "./CardsPanel.jsx";
 import CashflowPanel from "./CashflowPanel.jsx";
 import GoalsPanel from "./GoalsPanel.jsx";
+import InsightsPanel from "./InsightsPanel.jsx";
+import InvestmentDetailsPanel from "./InvestmentDetailsPanel.jsx";
+import PaymentsCenterPanel from "./PaymentsCenterPanel.jsx";
 import PortfolioPanel from "./PortfolioPanel.jsx";
+import ProductionReadinessPanel from "./ProductionReadinessPanel.jsx";
 import SecurityPanel from "./SecurityPanel.jsx";
 import TransactionsPanel from "./TransactionsPanel.jsx";
 import TransferPanel from "./TransferPanel.jsx";
@@ -33,11 +39,15 @@ function DashboardView({
       <>
         <section className="workbench">
           <AccountsPanel accounts={dashboard.accounts} />
-          <GoalsPanel goals={dashboard.goals} />
+          <BudgetsPanel budgets={dashboard.budgets} />
         </section>
         <section className="workbench">
           <CashflowPanel cashflow={dashboard.cashflow} />
+          <GoalsPanel goals={dashboard.goals} />
+        </section>
+        <section className="workbench">
           <TransactionsPanel transactions={filteredTransactions} />
+          <InsightsPanel insights={dashboard.insights} />
         </section>
       </>
     );
@@ -48,10 +58,10 @@ function DashboardView({
       <>
         <section className="dashboard-grid two-column">
           {transferPanel}
-          <TransactionsPanel transactions={filteredTransactions} />
+          <PaymentsCenterPanel paymentQueue={dashboard.paymentQueue} beneficiaries={dashboard.beneficiaries} />
         </section>
         <section className="workbench">
-          <CashflowPanel cashflow={dashboard.cashflow} />
+          <TransactionsPanel transactions={filteredTransactions} />
           <AccountsPanel accounts={dashboard.accounts} />
         </section>
       </>
@@ -60,10 +70,16 @@ function DashboardView({
 
   if (activeView === "Cards") {
     return (
-      <section className="workbench">
-        <CardsPanel cards={dashboard.cards} />
-        <TransactionsPanel transactions={filteredTransactions} />
-      </section>
+      <>
+        <section className="workbench">
+          <CardsPanel cards={dashboard.cards} />
+          <BudgetsPanel budgets={dashboard.budgets} />
+        </section>
+        <section className="workbench">
+          <TransactionsPanel transactions={filteredTransactions} />
+          <InsightsPanel insights={dashboard.insights} />
+        </section>
+      </>
     );
   }
 
@@ -72,11 +88,11 @@ function DashboardView({
       <>
         <section className="dashboard-grid two-column">
           <PortfolioPanel portfolio={dashboard.portfolio} />
-          <GoalsPanel goals={dashboard.goals} />
+          <InvestmentDetailsPanel watchlist={dashboard.watchlist} />
         </section>
         <section className="workbench">
           <CashflowPanel cashflow={dashboard.cashflow} />
-          <AccountsPanel accounts={dashboard.accounts} />
+          <GoalsPanel goals={dashboard.goals} />
         </section>
       </>
     );
@@ -84,10 +100,19 @@ function DashboardView({
 
   if (activeView === "Security") {
     return (
-      <section className="workbench">
-        <SecurityPanel risk={dashboard.risk} />
-        <CardsPanel cards={dashboard.cards} />
-      </section>
+      <>
+        <section className="workbench">
+          <SecurityPanel risk={dashboard.risk} />
+          <AuditTrailPanel auditLog={dashboard.auditLog} />
+        </section>
+        <section className="workbench">
+          <CardsPanel cards={dashboard.cards} />
+          <InsightsPanel insights={dashboard.insights} />
+        </section>
+        <section className="workbench single">
+          <ProductionReadinessPanel items={dashboard.productionReadiness} />
+        </section>
+      </>
     );
   }
 
@@ -101,12 +126,21 @@ function DashboardView({
 
       <section className="workbench">
         <AccountsPanel accounts={dashboard.accounts} />
-        <GoalsPanel goals={dashboard.goals} />
+        <InsightsPanel insights={dashboard.insights} />
       </section>
 
       <section className="workbench">
         <TransactionsPanel transactions={filteredTransactions} />
         <CardsPanel cards={dashboard.cards} />
+      </section>
+
+      <section className="workbench">
+        <PaymentsCenterPanel paymentQueue={dashboard.paymentQueue} beneficiaries={dashboard.beneficiaries} />
+        <BudgetsPanel budgets={dashboard.budgets} />
+      </section>
+
+      <section className="workbench single">
+        <ProductionReadinessPanel items={dashboard.productionReadiness} />
       </section>
     </>
   );

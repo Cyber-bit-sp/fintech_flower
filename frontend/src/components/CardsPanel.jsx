@@ -4,9 +4,24 @@ import { money } from "../utils/formatters.js";
 import PanelHeader from "./PanelHeader.jsx";
 
 function CardsPanel({ cards }) {
+  const primaryCard = cards[0];
+
   return (
     <article className="panel">
       <PanelHeader eyebrow="Cards" title="Spend control" icon={LockKeyhole} />
+      {primaryCard && (
+        <div className="virtual-card">
+          <div>
+            <span>Aurora corporate</span>
+            <strong>{primaryCard.policy}</strong>
+          </div>
+          <p>**** **** **** {primaryCard.last4}</p>
+          <div>
+            <span>{primaryCard.holder}</span>
+            <b>{Math.round((primaryCard.spent / primaryCard.limit) * 100)}% used</b>
+          </div>
+        </div>
+      )}
       <div className="card-stack">
         {cards.map((card) => (
           <div className="team-card" key={card.id}>
